@@ -15,8 +15,8 @@ class PromoCodeCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
-            'meta' => [
+            'data' => $this->collection, // the data retrieved for the respecting page
+            'meta' => [ // these are the pagination metadata
                 'current_page' => $this->currentPage(),
                 'total' => $this->total(),
                 'count' => $this->count(),
