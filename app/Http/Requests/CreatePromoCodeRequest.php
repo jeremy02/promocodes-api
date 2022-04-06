@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePromoCodeRequest extends FormRequest
-{
+class CreatePromoCodeRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -20,11 +19,10 @@ class CreatePromoCodeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'title' => 'required|string',
-            'code' => 'required|string|unique:promocodes,code',
+            'code' => 'required|string|unique:promocodes,code|min:6|max:12',
             'description' => 'string',
             'discount_amount' => 'required|numeric|min:50|max:1500',
             'radius' => 'required|numeric|min:1|max:100',

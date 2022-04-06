@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePromocodeRequest;
+use App\Http\Resources\Promocode as PromocodeResource;
 use App\Http\Resources\PromoCodeCollection;
 use App\Models\Promocode;
 use App\Repository\PromoCodeRepository;
@@ -32,15 +34,23 @@ class PromoCodeController extends Controller
         );
     }
 
-    public function create()
-    {
+    public function create() {
         // show form to create a promocode
     }
 
-
-    public function store(Request $request)
-    {
+    /**
+     * @param CreatePromocodeRequest $request
+     * @return JsonResponse
+     */
+    public function store(CreatePromoCodeRequest $request) {
         // store a new promocode
+        $newPromoCode = $this->promoCodesRepository->create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo Code was successfully created...',
+            'data' => new PromocodeResource($newPromoCode)
+        ]);
     }
 
     public function show(Promocode $promoCode)
