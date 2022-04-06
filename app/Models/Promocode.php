@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Facades\Services\LocationService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PromoCode extends Model
+class Promocode extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -19,7 +20,6 @@ class PromoCode extends Model
         'radius_unit',
         'start_at',
         'end_at',
-        'is_used',
         'is_active',
     ];
 

@@ -18,7 +18,7 @@ class CreatePromocodesTable extends Migration
             $table->string('title');
             $table->string('code')->unique();
             $table->text('description');
-            $table->float('discount_amount')->nullable(false);
+            $table->float('discount_amount');
             $table->float('radius');
             // can add as many units but for now lets use km and metres
             $table->enum('radius_unit', ['meter', 'km'])->default('km');
@@ -26,8 +26,8 @@ class CreatePromocodesTable extends Migration
             $table->dateTime('end_at');
             $table->boolean('is_used')->default(false);
             $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamps(); // created_at & updated_at fields
+            $table->softDeletes(); // support for soft deletes on the table
         });
     }
 
