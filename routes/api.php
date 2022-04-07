@@ -21,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 // our apis don't need authentication
 Route::resource('promocodes', PromoCodeController::class);
 Route::post('promocodes/checkvalid', [PromocodeController::class, 'checkvalid']);
+Route::put('promocodes/restore/{promocode}', [PromocodeController::class, 'restore']); // restore soft deleted records

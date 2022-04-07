@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\PromoCodeDoesNotExistException;
+use App\Exceptions\PromoCodeExpiredException;
 use App\Exceptions\PromoCodeRadiusRangeException;
 use App\Http\Requests\CheckValidPromoCodeRequest;
 use App\Http\Requests\CreatePromocodeRequest;
@@ -68,23 +70,45 @@ class PromoCodeController extends Controller
     }
 
 
-    public function update(Request $request, Promocode $promoCode)
-    {
+    public function update(Request $request, Promocode $promoCode) {
         //save the edited promocode
     }
 
+    /**
+     * @param Promocode $promocode
+     * @return JsonResponse|string[]
+     */
+    public function destroy(Promocode $promocode) {
+        // delete a promo code
+        $deletedPromoCode = $this->promoCodesRepository->destroy($promocode->id);
 
-    public function destroy(Promocode $promoCode)
-    {
-        //delete a promocode
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo code has been deleted successfully',
+        ]);
     }
 
+    /**
+     * @param Promocode $promocode
+     * @return JsonResponse|string[]
+     */
+    public function restore(Promocode $promocode) {
+        // restore a deleted promo code
+        $restoredPromoCode = $this->promoCodesRepository->restore($promocode->id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo code has been restored successfully',
+        ]);
+    }
 
     /**
      * @param CheckValidPromoCodeRequest $request // $value->start_at
      * @return JsonResponse
      * @throws GoogleMapsDirectionAPIException
      * @throws PromoCodeRadiusRangeException
+     * @throws PromoCodeExpiredException
+     * @throws PromoCodeDoesNotExistException
      */
     public function checkvalid(CheckValidPromoCodeRequest $request) {
         $promoCode = $this->promoCodesRepository->checkvalid($request->all());

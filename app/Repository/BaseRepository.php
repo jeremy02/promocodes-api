@@ -43,9 +43,9 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
-    public function all(array $conditions = [])
-    {
+    public function all(array $conditions = []) {
         return $this->getModel()->query()
+            // ->withTrashed() // return even soft deleted records
             ->where($conditions)
             ->orderBy(
                 $params['sortBy'] ?? $this->sortBy,
@@ -64,8 +64,7 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
-    public function create(array $input = [])
-    {
+    public function create(array $input = []) {
         $model = $this->getModel();
         $model->fill($input);
         $model->save();
@@ -78,9 +77,17 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
-    public function find(int $id)
-    {
+    public function find(int $id) {
         return $this->getModel()->where('id', $id)->first();
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function findWithTrashed(int $id) {
+        return $this->getModel()->onlyTrashed()->where('id', $id)->first();
     }
 
     /**
@@ -89,8 +96,7 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
-    public function update(int $id, array $input)
-    {
+    public function update(int $id, array $input) {
         $model = $this->find($id);
         $model->fill($input);
         $model->save();
@@ -103,8 +109,16 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
-    public function destroy(int $id)
-    {
+    public function destroy(int $id) {
         return $this->find($id)->delete();
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function restore(int $id) {
+        return $this->findWithTrashed($id)->restore();
     }
 }

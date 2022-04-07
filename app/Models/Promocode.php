@@ -28,6 +28,8 @@ class Promocode extends Model {
         'is_active' => 'boolean',
     ];
 
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
     /*
      * Check whether user’s pickup or destination is within {radius}{radius_unit} of the event venue
      */

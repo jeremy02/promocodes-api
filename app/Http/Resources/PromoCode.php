@@ -26,6 +26,9 @@ class PromoCode extends JsonResource
             'end_at' => $this->end_at,
             'is_used' => $this->is_used,
             'is_active' => $this->is_active,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'deleted_at' => $this->deleted_at,
         ];
     }
 }
