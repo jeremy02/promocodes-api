@@ -49,6 +49,9 @@ Please submit the code as if you intended to ship it to production. The details 
     > DB_PASSWORD=pass
     ```
 
+- Replace the GOOGLE_MAP_API_KEY in the `.env` file with your key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+
 - Use docker-compose to build the app image and run the services
 
   - Build the app image
@@ -95,6 +98,8 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
     > cp .env.example .env
     ```
+- Replace the GOOGLE_MAP_API_KEY in the `.env` file with your key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
 
 - Edit or add your database credentials in the `.env` file that you just copied above.
     ##### NB: In our case we have used [PostgreSQL 14](https://www.postgresql.org/)
@@ -148,7 +153,7 @@ Please submit the code as if you intended to ship it to production. The details 
 
  - One instance of the service may not be enough to sufficiently handle all the traffic to the application.
  - Docker supports scaling of services by creating multiple instances of a service, by using the --scale flag.
- - 
+
  #### To make these changes, update the nginx service configuration to by removing the container name and replacing it with the the following
  ```
     nginx:
@@ -169,6 +174,9 @@ and running the following command :
 > docker-compose up --scale nginx=10 -d
 ```
 
-## API DOCUMENTATION
+# API Documentation
 
 ---
+##### TO-DO: Documentation should be migrated to using [LaRecipe](https://packagist.org/packages/binarytorch/larecipe)
+
+--- 
