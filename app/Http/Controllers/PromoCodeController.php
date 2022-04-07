@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\GoogleMapsDirectionApiException;
 use App\Exceptions\PromoCodeDoesNotExistException;
 use App\Exceptions\PromoCodeExpiredException;
 use App\Exceptions\PromoCodeRadiusRangeException;
@@ -113,7 +113,7 @@ class PromoCodeController extends Controller
     /**
      * @param CheckValidPromoCodeRequest $request // $value->start_at
      * @return JsonResponse
-     * @throws GoogleMapsDirectionAPIException
+     * @throws GoogleMapsDirectionApiException
      * @throws PromoCodeRadiusRangeException
      * @throws PromoCodeExpiredException
      * @throws PromoCodeDoesNotExistException

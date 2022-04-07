@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\GoogleMapsDirectionApiException;
 use App\Exceptions\PromoCodeDoesNotExistException;
 use App\Exceptions\PromoCodeExpiredException;
 use App\Exceptions\PromoCodeRadiusRangeException;
@@ -16,7 +16,7 @@ class PromoCodeRepository extends BaseRepository
     /**
      * @param array $request
      * @return array
-     * @throws GoogleMapsDirectionAPIException
+     * @throws GoogleMapsDirectionApiException
      * @throws PromoCodeRadiusRangeException
      * @throws PromoCodeExpiredException
      * @throws PromoCodeDoesNotExistException
@@ -77,7 +77,7 @@ class PromoCodeRepository extends BaseRepository
      * @param array $originLatLong
      * @param array $destinationLatLong
      * @return mixed
-     * @throws GoogleMapsDirectionAPIException
+     * @throws GoogleMapsDirectionApiException
      */
     private function getRouteDirections(array $originLatLong, array $destinationLatLong) {
         try {
@@ -89,7 +89,7 @@ class PromoCodeRepository extends BaseRepository
 
             return json_decode($routeDirections, true);
         } catch (\Exception $exception) {
-            throw new GoogleMapsDirectionAPIException();
+            throw new GoogleMapsDirectionApiException();
         }
     }
 
