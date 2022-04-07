@@ -49,7 +49,7 @@ Please submit the code as if you intended to ship it to production. The details 
     > DB_PASSWORD=pass
     ```
 
-- Replace the GOOGLE_MAP_API_KEY in the `.env` file with your key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+- Replace the GOOGLE_MAP_API_KEY in the `.env` file with account your key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 
 - Use docker-compose to build the app image and run the services
@@ -98,7 +98,7 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
     > cp .env.example .env
     ```
-- Replace the GOOGLE_MAP_API_KEY in the `.env` file with your key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+- Replace the GOOGLE_MAP_API_KEY in the `.env` file with your account key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 
 - Edit or add your database credentials in the `.env` file that you just copied above.
@@ -115,12 +115,12 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
     > php artisan migrate:fresh --seed
     ```
-- Start a development server by running one/any of the below commands. The default port is 8000 but you can set port to 8080 for the demo
+- Start a development server by running one/any of the below commands. The default port is 8000 but you can set port to 8000 for the demo
     ```
-    > php artisan serve --port=8080
+    > php artisan serve --port=8000
     > php artisan serve
     ```
-- Open [http://localhost:8080](http://localhost:8080) or [http://localhost:8000](http://localhost:8000) depending on the port you are running
+- Open [http://localhost:8000](http://localhost:8000) or [http://localhost:8000](http://localhost:8000) depending on the port you are running
   your server on
 
 
@@ -128,12 +128,14 @@ Please submit the code as if you intended to ship it to production. The details 
 
 ---
 
+- Replace the GOOGLE_MAP_API_KEY in the `.env.testinng` file with your account key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
 - ##### If you have run or installed your application using docker run the following command to run the tests
     ```
     > docker-compose exec app php artisan test
     ```
 
-  - To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
+- To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
       ```
       > docker-compose exec app php artisan model:prune --pretend
       ```
@@ -180,3 +182,211 @@ and running the following command :
 ##### TO-DO: Documentation should be migrated to using [LaRecipe](https://packagist.org/packages/binarytorch/larecipe)
 
 --- 
+
+
+### List All Promo Codes
+
+| Method | Endpoint                             | Headers |
+|--------|--------------------------------------|---------|
+| GET    | http://localhost:8000/api/promocodes | Default |
+
+#### URL Params
+
+```json
+{
+    "page": "1"
+}
+```
+
+#### Data Params
+
+```html
+None
+```
+
+
+### Get A Promo Code
+
+| Method | Endpoint                                  | Headers |
+|--------|-------------------------------------------|---------|
+| GET    | http://localhost:8000/api/promocodes/{id} | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+### Create a Promo Code
+
+| Method | Endpoint                             | Headers |
+|--------|--------------------------------------|---------|
+| POST   | http://localhost:8000/api/promocodes | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```json
+{
+    "title": "Test Coupons Laravel",
+    "code": "T565MIMIJ7C",
+    "discount_amount": 345,
+    "radius": 20,
+    "radius_unit": "km",
+    "description": "This promocode gives free ride within 20km radius",
+    "start_at": "2022-04-07 17:00:00",
+    "end_at" : "2022-04-07 18:00:00"
+}
+```
+
+### Edit/Update a Promo Code
+
+| Method | Endpoint                                  | Headers |
+|--------|-------------------------------------------|---------|
+| PUT    | http://localhost:8000/api/promocodes/{id} | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```json
+{
+    "title": "Test Coupons Laravel",
+    "code": "T565MIMIJ7C",
+    "discount_amount": 450,
+    "radius": 22,
+    "radius_unit": "km",
+    "description": "This promocode gives free ride within 22km radius",
+    "start_at": "2022-04-07 20:00:00",
+    "end_at" : "2022-04-07 22:00:00"
+}
+```
+
+### Delete a Promo Code
+
+| Method | Endpoint                                  | Headers |
+|--------|-------------------------------------------|---------|
+| DELETE | http://localhost:8000/api/promocodes/{id} | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```html
+None
+```
+
+
+### List All Active Promo Codes
+
+| Method | Endpoint                                    | Headers |
+|--------|---------------------------------------------|---------|
+| GET    | http://localhost:8000/api/promocodes/active | Default |
+
+#### URL Params
+
+```json
+{
+    "page": "1"
+}
+```
+
+#### Data Params
+
+```html
+None
+```
+
+
+### List All In-active Promo Codes
+
+| Method | Endpoint                                      | Headers |
+|--------|-----------------------------------------------|---------|
+| GET    | http://localhost:8000/api/promocodes/inactive | Default |
+
+#### URL Params
+
+```json
+{
+    "page": "1"
+}
+```
+
+#### Data Params
+
+```html
+None
+```
+
+### Check Validity of Promo Codes
+
+| Method | Endpoint                                        | Headers |
+|--------|-------------------------------------------------|---------|
+| POST   | http://localhost:8000/api/promocodes/checkvalid | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```json
+{
+    "code": "4GIUJCBATO",
+    "origin_latitude": "-1.2999905808760437",
+    "origin_longitude": "36.80693232888409",
+    "destination_latitude": "-1.2695562226811647",
+    "destination_longitude": "36.82263241065327"
+}
+```
+
+### Activation of a Promo Code
+
+| Method | Endpoint                                           | Headers |
+|--------|----------------------------------------------------|---------|
+| PUT    | http://localhost:8000/api/promocodes/activate/{id} | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```html
+NONE
+```
+
+### De-activation of a Promo Code
+
+| Method | Endpoint                                             | Headers |
+|--------|------------------------------------------------------|---------|
+| PUT    | http://localhost:8000/api/promocodes/deactivate/{id} | Default |
+
+#### URL Params
+
+```html
+None
+```
+
+#### Data Params
+
+```html
+NONE
+```
