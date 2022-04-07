@@ -162,3 +162,13 @@ Please submit the code as if you intended to ship it to production. The details 
         networks:
             - safeboda
 ```
+
+and running the following command :
+
+```
+> docker-compose up --scale nginx=10 -d
+```
+
+## API DOCUMENTATION
+
+---
