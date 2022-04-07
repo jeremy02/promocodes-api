@@ -25,7 +25,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune', [
             '--model' => [Promocode::class],
         ])->daily();
-
     }
 
     /**
