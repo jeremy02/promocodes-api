@@ -27,7 +27,7 @@ class PromoCodeValidationRule implements Rule {
             [
                 ['code', '=', strtoupper($value)],
                 ['is_used', '=', false], // has the promo code been used
-                ['is_active', '=', true],
+                ['is_active', '=', true], // the promo code is still active
                 ['start_at', '<', now()], // if the event start_at is less than now
                 ['end_at', '>', now()], // if the end_at date is greater than now
             ]

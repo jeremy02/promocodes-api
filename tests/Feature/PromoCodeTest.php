@@ -488,7 +488,7 @@ class PromoCodeTest extends TestCase
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => 15,
                 'radius_unit' => 'km',
-                'start_at' => now()->subMinutes(2),
+                'start_at' => now()->subMinutes(20),
                 'end_at' => now()->addMonths(2),
             ]
         );
