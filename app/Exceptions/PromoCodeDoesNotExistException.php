@@ -11,6 +11,6 @@ class PromoCodeDoesNotExistException extends Exception {
             'status' => 'error',
             'message' => "Sorry. The event promo code cannot be found.",
         ];
-        return response()->json($response, 404);
+        return response()->json($response, 400);
     }
 }

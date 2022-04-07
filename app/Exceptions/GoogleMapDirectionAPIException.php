@@ -11,6 +11,6 @@ class GoogleMapsDirectionAPIException extends Exception {
             'status' => 'error',
             'message' => "There was an error while fetching polylines",
         ];
-        return response()->json($response, 503);
+        return response()->json($response, 500);
     }
 }

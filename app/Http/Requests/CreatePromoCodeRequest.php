@@ -22,7 +22,7 @@ class CreatePromoCodeRequest extends FormRequest {
     public function rules() {
         return [
             'title' => 'required|string',
-            'code' => 'required|string|unique:promocodes,code|min:6|max:12|regex:/^[A-Z0-9]+$/',
+            'code' => 'required|string|unique:promocodes,code|min:6|max:20|regex:/^[A-Z0-9]+$/',
             'description' => 'string',
             'discount_amount' => 'required|numeric|min:50|max:1500',
             'radius' => 'required|numeric|min:1|max:100',
