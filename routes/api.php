@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 // our apis don't need authentication
 Route::resource('promocodes', PromoCodeController::class);
+Route::post('promocodes/checkvalid', [PromocodeController::class, 'checkvalid']);

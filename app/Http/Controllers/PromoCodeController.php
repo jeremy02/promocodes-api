@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\PromoCodeRadiusRangeException;
+use App\Http\Requests\CheckValidPromoCodeRequest;
 use App\Http\Requests\CreatePromocodeRequest;
 use App\Http\Resources\Promocode as PromocodeResource;
 use App\Http\Resources\PromoCodeCollection;
@@ -74,5 +77,22 @@ class PromoCodeController extends Controller
     public function destroy(Promocode $promoCode)
     {
         //delete a promocode
+    }
+
+
+    /**
+     * @param CheckValidPromoCodeRequest $request // $value->start_at
+     * @return JsonResponse
+     * @throws GoogleMapsDirectionAPIException
+     * @throws PromoCodeRadiusRangeException
+     */
+    public function checkvalid(CheckValidPromoCodeRequest $request) {
+        $promoCode = $this->promoCodesRepository->checkvalid($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo Code is valid',
+            'data' => $promoCode
+        ]);
     }
 }

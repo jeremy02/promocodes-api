@@ -2,10 +2,79 @@
 
 namespace App\Repository;
 
+use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\PromoCodeRadiusRangeException;
+use App\Http\Resources\Promocode as PromocodeResource;
 use App\Models\Promocode;
 
 class PromoCodeRepository extends BaseRepository
 {
     protected $model = Promocode::class;
 
+    /**
+     * @param array $request
+     * @return array
+     * @throws GoogleMapsDirectionAPIException
+     * @throws PromoCodeRadiusRangeException
+     */
+    public function checkvalid(array $request) {
+        // Get Promo Code and only promo codes that are active
+        $promoCode = Promocode::where('code', $request['code'])->where('is_active', true)->first();
+
+        // create the origin LatLng object
+        $originLatLong = [
+            'latitude' => $request['origin_latitude'],
+            'longitude' => $request['origin_longitude']
+        ];
+
+        // create the destination LatLng object
+        $destinationLatLong = [
+            'latitude' => $request['destination_latitude'],
+            'longitude' => $request['destination_longitude']
+        ];
+
+        // Check if origin and destination range is in specified range else throw exception
+        $this->validateWithinRange($promoCode, $originLatLong, $destinationLatLong);
+
+        // Get Route and Corresponding Polylines from Google Map Direction API
+        $route = $this->getRouteDirections($originLatLong, $destinationLatLong);
+
+        // return the promo code data with route/polylines
+        return [
+            'routes' => $route['routes'],
+            'promocode' => new PromocodeResource($promoCode),
+        ];
+    }
+
+    /**
+     * @param Promocode $promoCode
+     * @param array $originLatLong
+     * @param array $destinationLatLong
+     * @throws PromoCodeRadiusRangeException
+     */
+    private function validateWithinRange(Promocode $promoCode, array $originLatLong, array $destinationLatLong) {
+        if (!$promoCode->isWithinRange($originLatLong, $destinationLatLong)) {
+            throw new PromoCodeRadiusRangeException();
+        }
+    }
+
+    /**
+     * @param array $originLatLong
+     * @param array $destinationLatLong
+     * @return mixed
+     * @throws GoogleMapsDirectionAPIException
+     */
+    private function getRouteDirections(array $originLatLong, array $destinationLatLong) {
+        try {
+            $routeDirections = \GoogleMaps::load('directions')
+                ->setParam([
+                    'origin' => $originLatLong['latitude'] . ',' . $originLatLong['longitude'],
+                    'destination' => $destinationLatLong['latitude'] . ',' . $destinationLatLong['longitude'],
+                ])->get();
+
+            return json_decode($routeDirections, true);
+        } catch (\Exception $exception) {
+            throw new GoogleMapsDirectionAPIException();
+        }
+    }
 }
