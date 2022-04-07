@@ -136,9 +136,9 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
 
 - To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
-      ```
-      > docker-compose exec app php artisan model:prune --pretend
-      ```
+    ```
+    > docker-compose exec app php artisan model:prune --pretend
+    ```
 - ##### If you have run or installed your application without docker, To run the tests run the following command
     ```
     > php artisan test
