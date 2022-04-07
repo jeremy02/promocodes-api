@@ -26,7 +26,7 @@ Please submit the code as if you intended to ship it to production. The details 
 
 ---
 
-## Installation Using Docker
+### Installation Using Docker
 
 - Clone the repo.
 
@@ -89,7 +89,7 @@ Please submit the code as if you intended to ship it to production. The details 
     > docker-compose down
     ```
   
-## Installation Locally Without Docker
+### Installation (Without Docker)
 - Clone the repo.
 
 - cd into the root folder of the project directory.
@@ -117,8 +117,8 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
 - Start a development server by running one/any of the below commands. The default port is 8000 but you can set port to 8000 for the demo
     ```
-    > php artisan serve --port=8000
     > php artisan serve
+    > php artisan serve --port=8080
     ```
 - Open [http://localhost:8000](http://localhost:8000) or [http://localhost:8000](http://localhost:8000) depending on the port you are running
   your server on
@@ -127,26 +127,26 @@ Please submit the code as if you intended to ship it to production. The details 
 ## Tests
 
 ---
-
 - Replace the GOOGLE_MAP_API_KEY in the `.env.testinng` file with your account key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 - ##### If you have run or installed your application using docker run the following command to run the tests
-    ```
-    > docker-compose exec app php artisan test
-    ```
+      ```
+      > docker-compose exec app php artisan test
+      ```
 
-- To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
-    ```
-    > docker-compose exec app php artisan model:prune --pretend
-    ```
+   To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
+      ```
+      > docker-compose exec app php artisan model:prune --pretend
+      ```
 - ##### If you have run or installed your application without docker, To run the tests run the following command
-    ```
-    > php artisan test
-    ```
+      ```
+      > php artisan test
+      ```
  
-- To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
+     To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
+      
     ```
-    > php artisan model:prune --pretend
+          > php artisan model:prune --pretend
     ```
 
 ## Scaling the application(Using Docker)
