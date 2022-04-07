@@ -28,6 +28,10 @@ Please submit the code as if you intended to ship it to production. The details 
 
 ## Installation Using Docker
 
+- Clone the repo.
+
+- cd into the root folder of the project directory.
+
 - If there is no env file, copy the .env file from .env.example
     ```
     > cp .env.example .env
@@ -83,6 +87,9 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
   
 ## Installation Locally Without Docker
+- Clone the repo.
+
+- cd into the root folder of the project directory.
 
 - If there is no env file, copy the .env file from .env.example
     ```
@@ -115,12 +122,22 @@ Please submit the code as if you intended to ship it to production. The details 
 ## Tests
 
 ---
-- To run the tests run the following command
+
+- ##### If you have run or installed your application using docker run the following command to run the tests
+    ```
+    > docker-compose exec app php artisan test
+    ```
+
+  - To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
+      ```
+      > docker-compose exec app php artisan model:prune --pretend
+      ```
+- ##### If you have run or installed your application without docker, To run the tests run the following command
     ```
     > php artisan test
     ```
  
-- To test deletion of the promo codes that are already expired to see how many promo codes will be pruned if the command were to actually run
+- To test deletion of the promo codes that are already expired OR to see how many promo codes will be pruned or are about to expire
     ```
     > php artisan model:prune --pretend
     ```
