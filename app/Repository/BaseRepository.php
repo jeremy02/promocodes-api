@@ -93,15 +93,6 @@ abstract class BaseRepository
 
     /**
      * @param int $id
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    public function findWithTrashed(int $id) {
-        return $this->getModel()->withTrashed()->get();
-    }
-
-    /**
-     * @param int $id
      * @param array $input
      * @return mixed
      * @throws \ReflectionException
