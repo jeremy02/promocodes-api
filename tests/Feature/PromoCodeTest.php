@@ -24,7 +24,8 @@ class PromoCodeTest extends TestCase
      * @return void
      */
     public function testAddNewPromoCode() {
-        $response = $this->post('/api/promocodes', [
+        $response = $this->withHeaders(['Accept' => 'application/json']) // to make this a json request
+            ->post('/api/promocodes', [
             'title' => $this->faker->sentence(3),
             'code' => 'T45RIRIJ7C', // $this->faker->regexify('[A-Z0-9]{10}') // since we are testing
                         // we add a hard-coded code so that we can test adding of a promo code duplicate code
@@ -59,7 +60,7 @@ class PromoCodeTest extends TestCase
         ]);
     }
 
-    /**v
+    /**
      * Testing Add new Promo Code API with invalid input
      *
      * @return void
@@ -80,6 +81,32 @@ class PromoCodeTest extends TestCase
         $invalidResponse->assertStatus(422);
         $invalidResponse->assertJsonStructure([
             'errors',
+            'message',
+        ]);
+    }
+
+    /**
+     * Testing Add new Promo Code API with Duplicate Code
+     *
+     * @return void
+     */
+    public function testAddNewPromoCodeWithDuplicateCode() {
+        $duplicateCodeResponse = $this->withHeaders(['Accept' => 'application/json']) // to make this a json request
+            ->post('/api/promocodes', [
+            'title' => $this->faker->sentence(3),
+            'code' => 'T45RIRIJ7C', // $this->faker->regexify('[A-Z0-9]{10}') // since we are testing
+            // we add a hard-coded code so that we can test adding of a promo code duplicate code
+            'description' => $this->faker->sentence(),
+            'discount_amount' => $this->faker->randomFloat(0,100, 1000),
+            'radius' => $this->faker->randomFloat(0, 2, 50),
+            'radius_unit' => 'km',
+            'start_at' => now()->addMinutes(4),
+            'end_at' => now()->addHours(4),
+        ]);
+
+        $duplicateCodeResponse->assertStatus(200);
+        $duplicateCodeResponse->assertJsonStructure([
+            'status',
             'message',
         ]);
     }
