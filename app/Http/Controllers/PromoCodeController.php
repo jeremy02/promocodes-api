@@ -14,7 +14,6 @@ use App\Http\Resources\PromoCodeCollection;
 use App\Models\Promocode;
 use App\Repository\PromoCodeRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PromoCodeController extends Controller
 {
@@ -140,6 +139,54 @@ class PromoCodeController extends Controller
             'status' => 'success',
             'message' => 'The Promo Code is valid',
             'data' => $promoCode
+        ]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function activePromoCodes() {
+        // get all the promo codes that are still active
+        $promoCodes = $this->promoCodesRepository->activePromoCodes();
+        // return response
+        return response()->json(['status' => 'success', 'data' => new PromocodeCollection($promoCodes)]);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function inActivePromoCodes() {
+        // get all the promo codes that are in-active
+        $promoCodes = $this->promoCodesRepository->inActivePromoCodes();
+        // return response
+        return response()->json(['status' => 'success', 'data' => new PromocodeCollection($promoCodes)]);
+    }
+
+    /**
+     * @param Promocode $promocode
+     * @return JsonResponse|string[]
+     */
+    public function activatePromoCode(Promocode $promocode)
+    {
+        $promocode = $this->promoCodesRepository->activatePromoCode($promocode->id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo code has been successfully activated',
+        ]);
+    }
+
+    /**
+     * @param Promocode $promocode
+     * @return JsonResponse|string[]
+     */
+    public function deActivatePromoCode(Promocode $promocode)
+    {
+        $promocode = $this->promoCodesRepository->deActivatePromoCode($promocode->id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo code has been successfully de-activated',
         ]);
     }
 }

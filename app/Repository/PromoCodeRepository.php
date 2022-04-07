@@ -92,4 +92,43 @@ class PromoCodeRepository extends BaseRepository
             throw new GoogleMapsDirectionAPIException();
         }
     }
+
+    /**
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function activePromoCodes() {
+        return $this->all(
+            ['is_active' => true]
+        );
+    }
+
+    /**
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function inActivePromoCodes() {
+        return $this->all(
+            ['is_active' => false]
+        );
+    }
+
+    /**
+     * @param int $promocodeId
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function activatePromoCode(int $promocodeId) {
+        return $this->update($promocodeId, ['is_active' => true]);
+    }
+
+    /**
+     * @param int $promocodeId
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function deActivatePromoCode(int $promocodeId)
+    {
+        return $this->update($promocodeId, ['is_active' => false]);
+    }
 }

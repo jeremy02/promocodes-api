@@ -97,7 +97,7 @@ abstract class BaseRepository
      * @throws \ReflectionException
      */
     public function findWithTrashed(int $id) {
-        return $this->getModel()->onlyTrashed()->where('id', $id)->first();
+        return $this->getModel()->withTrashed()->where('id', $id)->first();
     }
 
     /**
