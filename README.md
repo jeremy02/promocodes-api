@@ -141,3 +141,24 @@ Please submit the code as if you intended to ship it to production. The details 
     ```
     > php artisan model:prune --pretend
     ```
+
+## Scaling the application(Using Docker)
+
+---
+
+ - One instance of the service may not be enough to sufficiently handle all the traffic to the application.
+ - Docker supports scaling of services by creating multiple instances of a service, by using the --scale flag.
+ - 
+ #### To make these changes, update the nginx service configuration to by removing the container name and replacing it with the the following
+ ```
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - safeboda
+```
