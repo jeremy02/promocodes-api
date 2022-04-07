@@ -126,7 +126,6 @@ Please submit the code as if you intended to ship it to production. The details 
 
 ## Tests
 
----
 - Replace the GOOGLE_MAP_API_KEY in the `.env.testinng` file with your account key from [Google Maps Platform Project Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 - ##### If you have run or installed your application using docker run the following command to run the tests
