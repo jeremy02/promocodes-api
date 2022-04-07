@@ -28,8 +28,8 @@ class PromoCodeValidationRule implements Rule {
                 ['code', '=', strtoupper($value)],
                 ['is_used', '=', false], // has the promo code been used
                 ['is_active', '=', true],
-                ['start_at', '<', now()], // if the start_at date is less time now
-                ['end_at', '>', now()], // if the end_at date is greater than start_at
+                ['start_at', '<', now()], // if the event start_at is less than now
+                ['end_at', '>', now()], // if the end_at date is greater than now
             ]
         )->first();
 
@@ -42,6 +42,6 @@ class PromoCodeValidationRule implements Rule {
      * @return string
      */
     public function message() {
-        return 'The promo code is not valid.';
+        return 'The promo code is not valid or cannot be used.';
     }
 }

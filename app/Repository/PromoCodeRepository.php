@@ -32,7 +32,7 @@ class PromoCodeRepository extends BaseRepository
 
         // Check if the promo code is expired
         // Please note that this has already been handled by PromoCodeValidationRule
-        if($promoCode->start_at < now() && $promoCode->end_at < now()) {
+        if($promoCode->end_at < now()) {
             throw new PromoCodeExpiredException();
         }
 

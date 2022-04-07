@@ -144,6 +144,7 @@ class PromoCodeController extends Controller
     public function inActivePromoCodes() {
         // get all the promo codes that are in-active
         $promoCodes = $this->promoCodesRepository->inActivePromoCodes();
+
         // return response
         return response()->json(['status' => 'success', 'data' => new PromocodeCollection($promoCodes)]);
     }

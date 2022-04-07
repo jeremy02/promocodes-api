@@ -27,8 +27,8 @@ class UpdatePromoCodeRequest extends FormRequest {
             'discount_amount' => 'required|numeric|min:50|max:1500',
             'radius' => 'required|numeric|min:1|max:100',
             'radius_unit' => 'required|in:meter,km',
-            'start_at' => 'required|date|after:now',
-            'end_at' => 'required|date|after:start_at',
+            'start_at' => 'required|date', // |before:now
+            'end_at' => 'required|date|after:start_at,now',
         ];
     }
 }
