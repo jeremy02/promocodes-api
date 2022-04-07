@@ -77,6 +77,16 @@ abstract class BaseRepository
      * @return mixed
      * @throws \ReflectionException
      */
+    public function findOrFail(int $id) {
+        // return $this->getModel()->where('id', $id)->first();
+        return $this->getModel()->findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function find(int $id) {
         return $this->getModel()->where('id', $id)->first();
     }

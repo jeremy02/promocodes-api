@@ -8,6 +8,7 @@ use App\Exceptions\PromoCodeExpiredException;
 use App\Exceptions\PromoCodeRadiusRangeException;
 use App\Http\Requests\CheckValidPromoCodeRequest;
 use App\Http\Requests\CreatePromocodeRequest;
+use App\Http\Requests\UpdatePromoCodeRequest;
 use App\Http\Resources\Promocode as PromocodeResource;
 use App\Http\Resources\PromoCodeCollection;
 use App\Models\Promocode;
@@ -58,9 +59,19 @@ class PromoCodeController extends Controller
         ]);
     }
 
-    public function show(Promocode $promoCode)
-    {
-        //show a promocode
+    /**
+     * @param Promocode $promocode
+     * @return JsonResponse|string[]
+     */
+    public function show(Promocode $promocode){
+        //show a promo code
+        $promoCode = $this->promoCodesRepository->find($promocode->id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo Code has been found...',
+            'promocode' => new PromocodeResource($promoCode)
+        ]);
     }
 
 
@@ -70,8 +81,20 @@ class PromoCodeController extends Controller
     }
 
 
-    public function update(Request $request, Promocode $promoCode) {
-        //save the edited promocode
+    /**
+     * @param UpdatePromoCodeRequest $request
+     * @param Promocode $promocode
+     * @return array|JsonResponse
+     */
+    public function update(UpdatePromoCodeRequest $request, Promocode $promocode) {
+        // save the edited promocode
+        $promoCode = $this->promoCodesRepository->update($promocode->id, $request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The Promo code has been successfully updated',
+            'data' => new PromocodeResource($promoCode)
+        ]);
     }
 
     /**
