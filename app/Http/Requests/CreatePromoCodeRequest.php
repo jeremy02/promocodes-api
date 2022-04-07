@@ -22,7 +22,7 @@ class CreatePromoCodeRequest extends FormRequest {
     public function rules() {
         return [
             'title' => 'required|string',
-            'code' => 'required|string|unique:promocodes,code|min:6|max:12',
+            'code' => 'required|string|unique:promocodes,code|min:6|max:12|regex:/^[A-Z0-9]+$/',
             'description' => 'string',
             'discount_amount' => 'required|numeric|min:50|max:1500',
             'radius' => 'required|numeric|min:1|max:100',
@@ -31,6 +31,18 @@ class CreatePromoCodeRequest extends FormRequest {
             'end_at' => 'required|date|after:start_at',
             'is_used' => 'boolean',
             'is_active' => 'boolean',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages() {
+        return [
+            'title.required' => 'The title is required',
+            'code.required' => 'The code is required',
         ];
     }
 }
