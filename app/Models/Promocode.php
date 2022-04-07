@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Facades\Services\LocationService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promocode extends Model {
     use HasFactory, SoftDeletes;
+    use Prunable;
 
     protected $fillable = [
         'title',
@@ -41,5 +43,18 @@ class Promocode extends Model {
 
         // distance should be equal or below to the radius
         return $distance <= $this->radius;
+    }
+
+    /*
+     * periodically delete promo codes that are expired
+     * delete all the records that are older than end_at by one day
+     */
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable() {
+        return static::where('end_at', '<=', now()->subDay(1));
     }
 }

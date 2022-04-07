@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Promocode;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +17,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->command('model:prune')->daily();
+
+        /*
+         * Take care of the Expired Promo Codes
+         */
+        $schedule->command('model:prune', [
+            '--model' => [Promocode::class],
+        ])->daily();
+
     }
 
     /**
