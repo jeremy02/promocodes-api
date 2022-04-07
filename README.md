@@ -24,8 +24,6 @@ Please submit the code as if you intended to ship it to production. The details 
 
 # Installation
 
----
-
 ### Installation Using Docker
 
 - Clone the repo.
@@ -150,9 +148,9 @@ Please submit the code as if you intended to ship it to production. The details 
 
 ## Scaling the application(Using Docker)
 
----
-
  - One instance of the service may not be enough to sufficiently handle all the traffic to the application.
+
+
  - Docker supports scaling of services by creating multiple instances of a service, by using the --scale flag.
 
  #### To make these changes, update the nginx service configuration to by removing the container name and replacing it with the the following
@@ -177,7 +175,6 @@ and running the following command :
 
 # API Documentation
 
----
 ##### TO-DO: Documentation should be migrated to using [LaRecipe](https://packagist.org/packages/binarytorch/larecipe)
 
 --- 
