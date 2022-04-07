@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="![](public/images/safeboda.png)" width="400"></a></p>
+<p align="center"><a href="https://safeboda.com/ke/" target="_blank"><img src="https://github.com/jeremy02/promocodes-api/blob/master/public/images/safeboda_logo.png?raw=true" width="400"></a></p>
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# CASE STUDY FOR Software Engineer (PHP) - [SafeBoda](https://safeboda.com)
+Intro: SafeBoda wants to give out promo codes worth x amount during events so people can get
+free rides to and from the event. The flaw with that is people can use the promo codes without
+going to the event.
+Task: Implement a Promo code API with the following features.
+- Generation of new promo codes for an event
+- The promo code is worth a specific amount of ride
+- The promo code can expire
+- Can be deactivated
+- Return active promo codes
+- Return all promo codes
+- Only valid when user’s pickup or destination is within x radius of the event venue
+- The promo code radius should be configurable
+- To test the validity of the promo code, expose an endpoint that accepts origin,
+  destination, the promo code.
+- The API should return the promo code details and a polyline using the destination and
+  origin if the promo code is valid and an error otherwise.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Please submit the code as if you intended to ship it to production. The details matter. Tests are expected, as is well written, simple idiomatic code.
 
-## About Laravel
+## Installation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- If there is no env file, copy the .env file from .env.example
+    ```
+    > cp .env.example .env
+    ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Edit or add your database credentials in the `.env` file that you just copied above.
+    ##### NB: In our case we have used [PostgreSQL 14](https://www.postgresql.org/)
+- Install the laravel project dependencies
+    ```
+    > composer install
+    ```
+-  Sets the APP_KEY value in your .env file
+    ```
+    > php artisan key:generate
+    ```
+-  Seed your database with test data
+    ```
+    > php artisan migrate:fresh --seed
+    ```
+-  Start a development server by running one/any of the below commands. The default port is 8000 but you can set port to 8080 for the demo
+    ```
+    > php artisan serve --port=8080
+    > php artisan serve
+    ```
+   
+## View
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Open [http://localhost:8080](http://localhost:8080) or [http://localhost:8000](http://localhost:8000) depending on the port you are running
+your server on.
 
-## Learning Laravel
+## Tests
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- To run the tests run the following command
+    ```
+    > php artisan test
+    ```
+ 
+- To test deletion of the promo codes that are already expired to see how many promo codes will be pruned if the command were to actually run
+    ```
+    > php artisan model:prune --pretend
+    ```
