@@ -97,7 +97,7 @@ abstract class BaseRepository
      * @throws \ReflectionException
      */
     public function findWithTrashed(int $id) {
-        return $this->getModel()->withTrashed()->where('id', $id)->first();
+        return $this->getModel()->withTrashed()->get();
     }
 
     /**
@@ -121,14 +121,5 @@ abstract class BaseRepository
      */
     public function destroy(int $id) {
         return $this->find($id)->delete();
-    }
-
-    /**
-     * @param int $id
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    public function restore(int $id) {
-        return $this->findWithTrashed($id)->restore();
     }
 }

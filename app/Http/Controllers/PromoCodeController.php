@@ -111,20 +111,6 @@ class PromoCodeController extends Controller
     }
 
     /**
-     * @param Promocode $promocode
-     * @return JsonResponse|string[]
-     */
-    public function restore(Promocode $promocode) {
-        // restore a deleted promo code
-        $restoredPromoCode = $this->promoCodesRepository->restore($promocode->id);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'The Promo code has been restored successfully',
-        ]);
-    }
-
-    /**
      * @param CheckValidPromoCodeRequest $request // $value->start_at
      * @return JsonResponse
      * @throws GoogleMapsDirectionAPIException
