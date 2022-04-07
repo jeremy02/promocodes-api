@@ -19,6 +19,7 @@ class Promocode extends Model {
         'radius_unit',
         'start_at',
         'end_at',
+        'is_used',
         'is_active',
     ];
 

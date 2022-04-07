@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Exceptions\GoogleMapsDirectionAPIException;
+use App\Exceptions\PromoCodeDoesNotExistException;
+use App\Exceptions\PromoCodeExpiredException;
 use App\Exceptions\PromoCodeRadiusRangeException;
 use App\Http\Resources\Promocode as PromocodeResource;
 use App\Models\Promocode;
@@ -16,10 +18,23 @@ class PromoCodeRepository extends BaseRepository
      * @return array
      * @throws GoogleMapsDirectionAPIException
      * @throws PromoCodeRadiusRangeException
+     * @throws PromoCodeExpiredException
+     * @throws PromoCodeDoesNotExistException
      */
     public function checkvalid(array $request) {
         // Get Promo Code and only promo codes that are active
         $promoCode = Promocode::where('code', $request['code'])->where('is_active', true)->first();
+
+        // does the promo code exist
+        if(!$promoCode) {
+            throw new PromoCodeDoesNotExistException();
+        }
+
+        // Check if the promo code is expired
+        // Please note that this has already been handled by PromoCodeValidationRule
+        if($promoCode->start_at < now() && $promoCode->end_at < now()) {
+            throw new PromoCodeExpiredException();
+        }
 
         // create the origin LatLng object
         $originLatLong = [
