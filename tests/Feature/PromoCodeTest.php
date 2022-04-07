@@ -19,7 +19,7 @@ class PromoCodeTest extends TestCase
 
 
     /**
-     * Testing Add new promocode API endpoint
+     * Testing Add new Promo Code API
      *
      * @return void
      */
@@ -56,6 +56,31 @@ class PromoCodeTest extends TestCase
                 'updated_at',
                 'deleted_at'
             ]
+        ]);
+    }
+
+    /**v
+     * Testing Add new Promo Code API with invalid input
+     *
+     * @return void
+     */
+    public function testAddNewPromoCodeWithInvalidInput() {
+        $invalidResponse = $this->withHeaders(['Accept' => 'application/json']) // to make this a json request
+            ->post('/api/promocodes', [
+            'title' => $this->faker->sentence(3),
+            'code' => $this->faker->regexify('[A-Z0-9]{10}'),
+            'description' => $this->faker->sentence(),
+            'discount_amount' => $this->faker->randomFloat(0,100, 1000),
+            'radius' => $this->faker->randomFloat(0, 2, 50),
+            'radius_unit' => 'cm', // add centimetres is an invalid input
+            'start_at' => now()->subMinutes(3), // the start_at must be greater than now() // invalid input
+            'end_at' => now()->subHours(3), // the end_at must be greater than start_at // invalid input
+        ]);
+
+        $invalidResponse->assertStatus(422);
+        $invalidResponse->assertJsonStructure([
+            'errors',
+            'message',
         ]);
     }
 
