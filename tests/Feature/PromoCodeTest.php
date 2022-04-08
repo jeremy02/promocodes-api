@@ -464,14 +464,14 @@ class PromoCodeTest extends TestCase
     public function testCheckValidPromoCode() {
         // let first create a promo code
         $response = $this->withHeaders(['Accept' => 'application/json']) // to make this a json request
-            ->post('/api/promocodes',
+        ->post('/api/promocodes',
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => 15,
                 'radius_unit' => 'km',
-                'start_at' => now()->subMinutes(20),
+                'start_at' => now()->subMinutes(2),
                 'end_at' => now()->addMonths(2),
             ]
         );
@@ -481,7 +481,7 @@ class PromoCodeTest extends TestCase
 
         // add demo origin and destination LatLng
         $checkValidResponse = $this->withHeaders(['Accept' => 'application/json']) // to make this a json request
-            ->post('/api/promocodes/checkvalid',
+        ->post('/api/promocodes/checkvalid',
             [
                 'origin_latitude' => -1.2999905808760437,
                 'origin_longitude' => 36.80693232888409,
