@@ -17,7 +17,6 @@ class CreatePromocodesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('code')->unique();
-            $table->text('description');
             $table->float('discount_amount');
             $table->float('radius');
             // can add as many units but for now lets use km and metres

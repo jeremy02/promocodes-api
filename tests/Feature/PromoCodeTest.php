@@ -29,7 +29,6 @@ class PromoCodeTest extends TestCase
                 'title' => $this->faker->sentence(3),
                 'code' => 'T45RIRIJ7C', // $this->faker->regexify('[A-Z0-9]{10}') // since we are testing
                             // we add a hard-coded code so that we can test adding of a promo code duplicate code
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -45,7 +44,6 @@ class PromoCodeTest extends TestCase
             'data' => [
                 'id',
                 'title',
-                'description',
                 'discount_amount',
                 'code',
                 'radius',
@@ -71,7 +69,6 @@ class PromoCodeTest extends TestCase
             ->post('/api/promocodes', [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'cm', // add centimetres is an invalid input
@@ -99,7 +96,6 @@ class PromoCodeTest extends TestCase
                 'title' => $this->faker->sentence(3),
                 'code' => 'T45RIRIJ7C', // $this->faker->regexify('[A-Z0-9]{10}') // since we are testing
                 // we add a hard-coded code so that we can test adding of a promo code duplicate code
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -132,7 +128,6 @@ class PromoCodeTest extends TestCase
                         'id',
                         'title',
                         'code',
-                        'description',
                         'discount_amount',
                         'radius',
                         'radius_unit',
@@ -170,7 +165,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -194,7 +188,6 @@ class PromoCodeTest extends TestCase
             'promocode' => [
                 'id',
                 'title',
-                'description',
                 'discount_amount',
                 'code',
                 'radius',
@@ -219,7 +212,6 @@ class PromoCodeTest extends TestCase
         ->post('/api/promocodes', [
             'title' => $this->faker->sentence(3),
             'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-            'description' => $this->faker->sentence(),
             'discount_amount' => $this->faker->randomFloat(0,100, 1000),
             'radius' => 3,
             'radius_unit' => 'km',
@@ -234,7 +226,6 @@ class PromoCodeTest extends TestCase
         ->put('/api/promocodes/'.$newPromoCodeData['data']['id'],
             [
                 'title' => 'Edited Promo Code 21km',
-                'description' => 'Get a free ride within 21km of the event destnation',
                 'radius' => 21,
                 'radius_unit' => 'km',
                 'code' => 'RIDE21KMFREE',
@@ -251,7 +242,6 @@ class PromoCodeTest extends TestCase
             'data' => [
                 'id',
                 'title',
-                'description',
                 'discount_amount',
                 'code',
                 'radius',
@@ -279,7 +269,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => 3,
                 'radius_unit' => 'km',
@@ -313,7 +302,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -349,7 +337,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -389,7 +376,6 @@ class PromoCodeTest extends TestCase
                         'id',
                         'title',
                         'code',
-                        'description',
                         'discount_amount',
                         'radius',
                         'radius_unit',
@@ -425,7 +411,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => $this->faker->randomFloat(0, 2, 50),
                 'radius_unit' => 'km',
@@ -448,7 +433,6 @@ class PromoCodeTest extends TestCase
                         'id',
                         'title',
                         'code',
-                        'description',
                         'discount_amount',
                         'radius',
                         'radius_unit',
@@ -484,7 +468,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => 15,
                 'radius_unit' => 'km',
@@ -516,7 +499,6 @@ class PromoCodeTest extends TestCase
                 'promocode' => [
                     'id',
                     'title',
-                    'description',
                     'discount_amount',
                     'code',
                     'radius',
@@ -587,7 +569,6 @@ class PromoCodeTest extends TestCase
             [
                 'title' => $this->faker->sentence(3),
                 'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-                'description' => $this->faker->sentence(),
                 'discount_amount' => $this->faker->randomFloat(0,100, 1000),
                 'radius' => 3,
                 'radius_unit' => 'km',

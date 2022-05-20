@@ -19,7 +19,6 @@ class PromoCode extends JsonResource
             'title' => $this->title,
             'code' => $this->code,
             'discount_amount' => $this->discount_amount,
-            'description' => $this->description,
             'radius' => $this->radius,
             'radius_unit' => $this->radius_unit,
             'start_at' => $this->start_at,

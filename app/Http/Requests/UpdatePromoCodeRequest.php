@@ -23,7 +23,6 @@ class UpdatePromoCodeRequest extends FormRequest {
         return [
             'title' => 'required|string',
             'code' => ['required','string', 'min:6', 'max:20', 'regex:/^[A-Z0-9]+$/','unique:promocodes,code,'.$this->promocode->id],
-            'description' => 'string',
             'discount_amount' => 'required|numeric|min:50|max:1500',
             'radius' => 'required|numeric|min:1|max:100',
             'radius_unit' => 'required|in:meter,km',

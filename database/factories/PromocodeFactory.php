@@ -24,7 +24,6 @@ class PromocodeFactory extends Factory
         return [
             'title' => $this->faker->sentence(3),
             'code' => $this->faker->regexify('[A-Z0-9]{10}'),
-            'description' => $this->faker->sentence(),
             'discount_amount' => $this->faker->randomFloat(0,100, 1000),
             'radius' => $this->faker->randomFloat(0, 2, 50),
             'radius_unit' => 'km',

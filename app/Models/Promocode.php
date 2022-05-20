@@ -15,7 +15,6 @@ class Promocode extends Model {
     protected $fillable = [
         'title',
         'code',
-        'description',
         'discount_amount',
         'radius',
         'radius_unit',

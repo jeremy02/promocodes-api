@@ -234,7 +234,6 @@ None
     "discount_amount": 345,
     "radius": 20,
     "radius_unit": "km",
-    "description": "This promocode gives free ride within 20km radius",
     "start_at": "2022-04-07 17:00:00",
     "end_at" : "2022-04-07 18:00:00"
 }
@@ -261,7 +260,6 @@ None
     "discount_amount": 450,
     "radius": 22,
     "radius_unit": "km",
-    "description": "This promocode gives free ride within 22km radius",
     "start_at": "2022-04-07 20:00:00",
     "end_at" : "2022-04-07 22:00:00"
 }
